@@ -1,3 +1,30 @@
+# Project: College Football State
+
+[API](https://any-api.com/collegefootballdata_com/collegefootballdata_com/docs/API_Description)
+
+## Login Page Goal
+
+The login page will use a single predefined code for logging in. The page should resemble the Adobe "forgot password" functionality which uses a 6-digit code separated into boxes.
+
+- Code: 012345
+
+### Error Handling States
+
+- Entered non-numeric key
+- Submitted wrong 6-digit code
+- Submitted with empty
+
+## Team Overview
+
+The home page should be an overview of teams arranged in a grid of tiles.
+
+- Pagination (React Router)
+- Search functionality
+
+We want to be able to select a team and see the upcoming games and the games of previous years. For previous games we want to be able to see the game details. Make use of a routing system.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
