@@ -8,13 +8,13 @@ The login page will use a single predefined code for logging in. The page should
 
 - Code: 012345
 
-### Error Handling States
+### Error States
 
 - Entered non-numeric key
 - Submitted wrong 6-digit code
 - Submitted with empty
 
-## Team Overview
+## Team Overview Page
 
 The home page should be an overview of teams arranged in a grid of tiles.
 
