@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./Login/Login";
 import { getTeams } from "./api";
 import "./App.css";
-import TeamCard from "./Components/TeamCard";
 import { Team } from "./interfaces";
+import TeamsView from "./TeamsView";
+import { Route, Switch } from "react-router-dom";
 
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [teams, setTeams] = useState<Team[]>([]);
 
+  // initialize teams
   useEffect(() => {
     getTeams().then((teamsData) => setTeams(teamsData));
   }, []);
@@ -19,22 +22,18 @@ const App = () => {
   return (
     <div className="App">
       <Container fluid>
-        <Row className="justify-content-md-center">
-          <Col xs="6">
-            <header className="text-center">College Football Stats</header>
-          </Col>
-        </Row>
-        <Row>
-          {isSignedIn ? (
-            teams.map((team, i) => (
-              <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
-                <TeamCard team={team} />
-              </Col>
-            ))
-          ) : (
-            <Login setIsSignedIn={setIsSignedIn} />
-          )}
-        </Row>
+        {isSignedIn ? (
+          <Switch>
+            <Route path="/:id">
+              <TeamsView teams={teams} />
+            </Route>
+            <Route path="/">
+              <TeamsView teams={teams} />
+            </Route>
+          </Switch>
+        ) : (
+          <Login setIsSignedIn={setIsSignedIn} />
+        )}
       </Container>
     </div>
   );
