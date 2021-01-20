@@ -42,6 +42,7 @@ const Login = ({ setIsSignedIn }: Props) => {
     focusNextInput(objKey);
   };
 
+  // This function would need to be refactored if the number of input boxes were to exceed 10
   const focusNextInput = (currentInputId: string) => {
     const boxNumber = parseInt(currentInputId[currentInputId.length - 1]);
     const nextInput: HTMLElement | null = document.querySelector(
