@@ -39,6 +39,18 @@ const Login = ({ setIsSignedIn }: Props) => {
     setFormValue((prevState) => {
       return { ...prevState, [objKey]: newValue };
     });
+    focusNextInput(objKey);
+  };
+
+  const focusNextInput = (currentInputId: string) => {
+    const boxNumber = parseInt(currentInputId[currentInputId.length - 1]);
+    const nextInput: HTMLElement | null = document.querySelector(
+      `#box${boxNumber + 1}`
+    );
+
+    if (nextInput !== null) {
+      nextInput.focus();
+    }
   };
 
   const verifyPassword = (password: string): boolean => {
