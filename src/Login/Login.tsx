@@ -48,9 +48,6 @@ const Login = ({ setIsSignedIn }: Props) => {
   const handleChange = (event: FormEvent<HTMLFormElement>) => {
     const newValue = event.currentTarget.value;
     const objKey = event.currentTarget.id;
-    console.log(newValue);
-
-    console.log(isNumber(newValue));
 
     if (isNumber(newValue)) {
       setFormValue((prevState) => {
@@ -95,10 +92,6 @@ const Login = ({ setIsSignedIn }: Props) => {
   };
 
   const isNumber = (input: string) => {
-    console.log(parseInt(input));
-
-    console.log(typeof parseInt(input));
-
     return !isNaN(parseInt(input));
   };
 

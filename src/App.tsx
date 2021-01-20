@@ -3,17 +3,17 @@ import { Col, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./Login/Login";
-import { getConferences } from "./api";
+import { getTeams } from "./api";
 import "./App.css";
-import ConferenceCard from "./Components/ConferenceCard";
-import { Conference } from "./interfaces";
+import TeamCard from "./Components/TeamCard";
+import { Team } from "./interfaces";
 
 const App = () => {
-  const [conferences, setConferences] = useState<Conference[]>([]);
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+  const [teams, setTeams] = useState<Team[]>([]);
 
   useEffect(() => {
-    getConferences().then((conferencesData) => setConferences(conferencesData));
+    getTeams().then((teamsData) => setTeams(teamsData));
   }, []);
 
   return (
@@ -26,9 +26,9 @@ const App = () => {
         </Row>
         <Row>
           {isSignedIn ? (
-            conferences.map((conf, i) => (
-              <Col xs="6" md="4" lg="2" key={`${conf.abbreviation}-${i}`}>
-                <ConferenceCard conference={conf} />
+            teams.map((team, i) => (
+              <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
+                <TeamCard team={team} />
               </Col>
             ))
           ) : (
