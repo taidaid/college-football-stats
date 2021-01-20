@@ -16,7 +16,6 @@ const LoginTextBox = ({ id, width, value, handleChange }: Props) => {
         size="lg"
         type="text"
         maxLength={1}
-        placeholder="Large text"
         value={value}
         onChange={handleChange}
       />
