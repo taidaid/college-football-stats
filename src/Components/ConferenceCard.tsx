@@ -8,7 +8,7 @@ interface Props {
 
 const ConferenceCard = ({ conference }: Props) => {
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card>
       <Card.Body>
         <Card.Title>{conference.short_name}</Card.Title>
         <Button variant="primary">View Teams</Button>
