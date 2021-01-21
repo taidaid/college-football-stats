@@ -24,10 +24,7 @@ const App = () => {
       <Container fluid>
         {isSignedIn ? (
           <Switch>
-            <Route path="/:id">
-              <TeamsView teams={teams} />
-            </Route>
-            <Route path="/">
+            <Route path="/:id?">
               <TeamsView teams={teams} />
             </Route>
           </Switch>
