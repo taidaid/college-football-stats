@@ -38,14 +38,14 @@ const TeamsView = ({ teams }: Props) => {
 
   return (
     <>
-      <Row className="justify-content-xs-center">
+      <Row>
         <Col xs={{ offset: "3", span: "6" }}>
           <header className="text-center">
             <h1>College Football Stats</h1>
           </header>
         </Col>
       </Row>
-      <Row className="justify-content-xs-center">
+      <Row>
         <Col xs={{ offset: "3", span: "6" }} className="text-center">
           {links}
         </Col>
