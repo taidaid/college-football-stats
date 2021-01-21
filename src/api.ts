@@ -1,4 +1,4 @@
-import { Team } from "./interfaces";
+import { Game, Team } from "./interfaces";
 
 const httpRequest = (url: string, options?: any) =>
   fetch(url, options)
@@ -8,4 +8,11 @@ const httpRequest = (url: string, options?: any) =>
 const getTeams = (): Promise<Team[]> =>
   httpRequest(`https://api.collegefootballdata.com/teams`);
 
-export { getTeams };
+const getGames = (year: number, team: string): Promise<Game[]> =>
+  httpRequest(
+    `https://api.collegefootballdata.com/games?year=${year}&team=${encodeURIComponent(
+      team
+    )}`
+  );
+
+export { getTeams, getGames };
