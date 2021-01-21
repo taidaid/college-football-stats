@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import LoginTextBox from "./LoginTextBox";
 
@@ -35,7 +29,7 @@ const Login = ({ setIsSignedIn }: Props) => {
   };
   const [formValue, setFormValue] = useState<FormValue>(initialFormState);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const submittedPassword: string = Object.values(formValue).join("");
     if (verifyPassword(submittedPassword)) {
@@ -45,7 +39,7 @@ const Login = ({ setIsSignedIn }: Props) => {
     }
   };
 
-  const handleChange = (event: FormEvent<HTMLFormElement>) => {
+  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
     const newValue = event.currentTarget.value;
     const objKey = event.currentTarget.id;
 
