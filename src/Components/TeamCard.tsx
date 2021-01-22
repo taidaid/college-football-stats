@@ -51,7 +51,7 @@ const TeamCard = ({ team }: Props) => {
       <Card.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Row className="align-items-center mt-2">
+            <Form.Row className="align-items-center my-2">
               <Col>
                 <Form.Label srOnly>Search</Form.Label>
                 <Form.Control
