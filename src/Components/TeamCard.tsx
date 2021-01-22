@@ -44,12 +44,14 @@ const TeamCard = ({ team }: Props) => {
   };
 
   return (
-    <Card>
+    <Card className="my-3" style={{ minHeight: "220px" }}>
+      <Card.Header>
+        <Card.Title className="text-center">{team.school}</Card.Title>
+      </Card.Header>
       <Card.Body>
-        <Card.Title>{team.school}</Card.Title>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Row className="align-items-center">
+            <Form.Row className="align-items-center mt-2">
               <Col>
                 <Form.Label srOnly>Search</Form.Label>
                 <Form.Control
@@ -65,8 +67,8 @@ const TeamCard = ({ team }: Props) => {
                 <Col>Please enter a valid year</Col>
               </Form.Row>
             )}
-            <Form.Row>
-              <Col xs={{ offset: 1, span: 10 }} className="text-center mt-2">
+            <Form.Row className="justify-content-md-center">
+              <Col className="text-center mt-3">
                 <Button variant="primary" type="submit" onSubmit={handleSubmit}>
                   View Games
                 </Button>
