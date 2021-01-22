@@ -129,7 +129,7 @@ const Login = ({ setIsSignedIn }: Props) => {
 
   return (
     <Col xs={{ span: 4, offset: 4 }}>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="mt-3">
         <Form.Group>
           <Form.Label>Enter Code</Form.Label>
           <Row>{passwordInputPoxes}</Row>
