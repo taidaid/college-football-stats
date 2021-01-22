@@ -8,7 +8,7 @@ const httpRequest = (url: string, options?: any) =>
 const getTeams = (): Promise<Team[]> =>
   httpRequest(`https://api.collegefootballdata.com/teams`);
 
-const getGames = (year: number, team: string): Promise<Game[]> =>
+const getGames = (year: string, team: string): Promise<Game[]> =>
   httpRequest(
     `https://api.collegefootballdata.com/games?year=${year}&team=${encodeURIComponent(
       team

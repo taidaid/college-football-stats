@@ -1,12 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  FormControl,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Col, Form } from "react-bootstrap";
 import { getGames } from "../api";
 import { Game, Team } from "../interfaces";
 import GamesModal from "./GamesModal";
@@ -17,62 +10,70 @@ interface Props {
 
 const TeamCard = ({ team }: Props) => {
   const [games, setGames] = useState<Game[]>([]);
-  const [fetched, setFetched] = useState<boolean>(false);
-  const [year, setYear] = useState<number>(new Date().getFullYear() - 1);
+  const [year, setYear] = useState<string>(
+    (new Date().getFullYear() - 1).toString()
+  );
   const [showModal, setShowModal] = useState(false);
+  const [showInputError, setShowInputError] = useState(false);
 
-  const handleSubmit = (
-    event:
-      | React.FormEvent<HTMLInputElement>
-      | React.MouseEvent<HTMLElement, MouseEvent>
-  ) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const yearIsFiniteNumber = Number.isFinite(parseInt(year));
+    if (!yearIsFiniteNumber) {
+      setShowInputError(true);
+      return;
+    }
+
     getGames(year, team.school).then((gamesData) => {
-      if (gamesData.length) {
-        setShowModal(true);
-        setGames(gamesData);
-      }
-      setFetched(true);
+      setShowModal(true);
+      setGames(gamesData);
     });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    const newValue = parseInt(event.currentTarget.value);
+    const { value } = event.currentTarget;
+    const valueAsNumber = parseInt(value);
 
-    if (Number.isFinite(newValue)) {
-      setYear(newValue);
+    if (Number.isFinite(valueAsNumber) || value === "") {
+      setYear(value);
+      setShowInputError(false);
+    } else {
+      setShowInputError(true);
     }
   };
-
-  useEffect(() => {
-    if (!games.length && fetched && year) {
-      window.alert(`There are no games for the year ${year}.`);
-      console.log("ALERT");
-      setFetched(false);
-    }
-  }, [games, fetched, year]);
 
   return (
     <Card>
       <Card.Body>
         <Card.Title>{team.school}</Card.Title>
-        <InputGroup className="xs-3">
-          <FormControl
-            aria-label="Year"
-            placeholder="Enter a Year"
-            value={year}
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
-        </InputGroup>
-        <Row>
-          <Col xs={{ offset: 1, span: 10 }} className="text-center">
-            <Button variant="primary" onClick={handleSubmit}>
-              View Games
-            </Button>
-          </Col>
-        </Row>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Row className="align-items-center">
+              <Col>
+                <Form.Label srOnly>Search</Form.Label>
+                <Form.Control
+                  aria-label="Year"
+                  placeholder="Enter a Year"
+                  value={year}
+                  onChange={handleChange}
+                />
+              </Col>
+            </Form.Row>
+            {showInputError && (
+              <Form.Row className="text-center text-danger">
+                <Col>Please enter a valid year</Col>
+              </Form.Row>
+            )}
+            <Form.Row>
+              <Col xs={{ offset: 1, span: 10 }} className="text-center mt-2">
+                <Button variant="primary" type="submit" onSubmit={handleSubmit}>
+                  View Games
+                </Button>
+              </Col>
+            </Form.Row>
+          </Form.Group>
+        </Form>
         <GamesModal
           games={games}
           year={year}

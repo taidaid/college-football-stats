@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import SearchForm from "./Components/SearchForm";
 import SearchModal from "./Components/SearchModal";

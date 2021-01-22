@@ -5,7 +5,7 @@ import { displayGamesStats } from "../utils";
 
 interface Props {
   games: Game[];
-  year: number;
+  year: string;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,7 +18,7 @@ const GamesModal = ({ games, year, showModal, setShowModal }: Props) => {
         <Modal.Header closeButton>
           <Modal.Title>Year {year}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{displayGamesStats(games)}</Modal.Body>
+        <Modal.Body>{displayGamesStats(games, year)}</Modal.Body>
       </Modal>
     </>
   );
