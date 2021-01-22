@@ -14,9 +14,9 @@ const App = () => {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [teams, setTeams] = useState<Team[]>([]);
 
-  // initialize teams
+  // initialize teams with fallback to empty array in case API goes down and returns undefined again
   useEffect(() => {
-    getTeams().then((teamsData) => setTeams(teamsData));
+    getTeams().then((teamsData) => setTeams(teamsData || []));
   }, []);
 
   return (
