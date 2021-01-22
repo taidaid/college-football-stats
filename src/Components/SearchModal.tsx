@@ -25,7 +25,9 @@ const SearchModal = ({
           <Modal.Title>Search All Schools</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row>{displaySearchedTeams(searchValue, teams)}</Row>
+          <Row>
+            {showSearchModal && displaySearchedTeams(searchValue, teams)}
+          </Row>
         </Modal.Body>
       </Modal>
     </>
