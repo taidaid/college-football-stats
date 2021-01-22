@@ -45,17 +45,6 @@ const TeamCard = ({ team }: Props) => {
     }
   };
 
-  const gamesModalComponent = showModal ? (
-    <GamesModal
-      games={games}
-      year={year}
-      showModal={showModal}
-      setShowModal={setShowModal}
-    ></GamesModal>
-  ) : (
-    ""
-  );
-
   useEffect(() => {
     if (!games.length && fetched && year) {
       window.alert(`There are no games for the year ${year}.`);
@@ -84,7 +73,12 @@ const TeamCard = ({ team }: Props) => {
             </Button>
           </Col>
         </Row>
-        {gamesModalComponent}
+        <GamesModal
+          games={games}
+          year={year}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </Card.Body>
     </Card>
   );
