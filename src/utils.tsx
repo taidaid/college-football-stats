@@ -91,11 +91,17 @@ export const formatGameStats = (game: Game) => {
   });
 };
 
-export const displayGamesStats = (games: Game[]) => {
-  return games.map((game) => (
-    <React.Fragment key={`${game.id}`}>
-      <Row>{formatGameStats(game)}</Row>
-      <hr />
-    </React.Fragment>
-  ));
+export const displayGamesStats = (games: Game[], year: string) => {
+  if (games.length) {
+    return games.map((game) => (
+      <React.Fragment key={`${game.id}`}>
+        <Row>{formatGameStats(game)}</Row>
+        <hr />
+      </React.Fragment>
+    ));
+  } else if (parseInt(year) > 1875) {
+    return "American football wasn't even invented yet!";
+  } else {
+    return "No games to display for this year";
+  }
 };
