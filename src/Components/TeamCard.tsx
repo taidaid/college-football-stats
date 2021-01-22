@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, Col, Form } from "react-bootstrap";
 import { getGames } from "../api";
 import { Game, Team } from "../interfaces";
+import { isNumberString } from "../utils";
 import GamesModal from "./GamesModal";
 
 interface Props {
@@ -18,8 +19,8 @@ const TeamCard = ({ team }: Props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const yearIsFiniteNumber = Number.isFinite(parseInt(year));
-    if (!yearIsFiniteNumber) {
+    const yearIsNumberString = isNumberString(year);
+    if (!yearIsNumberString) {
       setShowInputError(true);
       return;
     }

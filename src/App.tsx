@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./Login/Login";
 import { getTeams } from "./api";
-import "./App.css";
 import { Team } from "./interfaces";
 import TeamsView from "./TeamsView";
 import { Route, Switch } from "react-router-dom";

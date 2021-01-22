@@ -16,6 +16,7 @@ const TeamsView = ({ teams }: Props) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [showSearchError, setShowSearchError] = useState<boolean>(false);
 
+  // removes duplicates from array and sorts
   const linkOptions = [...new Set(teams.map((team) => team.school[0]))].sort();
   const linkStyles = {
     padding: "10px",
