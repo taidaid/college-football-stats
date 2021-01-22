@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootswatch/dist/darkly/bootstrap.min.css";
 
 import Login from "./Login/Login";
 import { getTeams } from "./api";
