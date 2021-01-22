@@ -34,7 +34,7 @@ const SearchForm = ({
               id={"search"}
               size="lg"
               type="text"
-              placeholder="Search All Teams"
+              placeholder="Search All School Names"
               value={searchValue}
               onChange={handleChange}
             />
