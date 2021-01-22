@@ -6,11 +6,17 @@ import { Game, Team } from "./interfaces";
 export const displaySearchedTeams = (filter: string, teams: Team[]) => {
   const regex = new RegExp(filter, "gi");
   const teamsToDisplay = teams.filter((team) => team.school.match(regex));
-  return teamsToDisplay.map((team, i) => (
-    <Col xs="12" key={`${team.school}-${i}`}>
-      <TeamCard team={team} />
+  return teamsToDisplay.length ? (
+    teamsToDisplay.map((team, i) => (
+      <Col xs="12" key={`${team.school}-${i}`}>
+        <TeamCard team={team} />
+      </Col>
+    ))
+  ) : (
+    <Col className="text-center mt-3">
+      <h2>No teams found!</h2>
     </Col>
-  ));
+  );
 };
 
 export const displayTeams = (filter: string | undefined, teams: Team[]) => {
@@ -20,11 +26,17 @@ export const displayTeams = (filter: string | undefined, teams: Team[]) => {
     (team) => team.school[0].toUpperCase() === filter!.toUpperCase()
   );
 
-  return teamsToDisplay.map((team, i) => (
-    <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
-      <TeamCard team={team} />
+  return teamsToDisplay.length ? (
+    teamsToDisplay.map((team, i) => (
+      <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
+        <TeamCard team={team} />
+      </Col>
+    ))
+  ) : (
+    <Col className="text-center mt-3">
+      <h2>No teams found!</h2>
     </Col>
-  ));
+  );
 };
 
 // I can't easily find out what away line and home line scores are, so I don't know how to display them
@@ -99,7 +111,7 @@ export const displayGamesStats = (games: Game[], year: string) => {
         <hr />
       </React.Fragment>
     ));
-  } else if (parseInt(year) > 1875) {
+  } else if (parseInt(year) < 1875) {
     return "American football wasn't even invented yet!";
   } else {
     return "No games to display for this year";
