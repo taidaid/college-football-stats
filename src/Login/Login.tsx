@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { isNumberString } from "../utils";
 import LoginTextBox from "./LoginTextBox";
 
 interface Props {
@@ -10,8 +11,6 @@ interface FormValue {
   [a: string]: string;
 }
 
-const passwordLength = 6;
-const loginTextBoxWidth = Math.floor(12 / passwordLength);
 const acceptedPassword = "012345";
 
 const Login = ({ setIsSignedIn }: Props) => {
@@ -19,14 +18,13 @@ const Login = ({ setIsSignedIn }: Props) => {
     false
   );
   const [wrongPasswordState, setWrongPasswordState] = useState<boolean>(false);
-  const initialFormState = {
-    box0: "",
-    box1: "",
-    box2: "",
-    box3: "",
-    box4: "",
-    box5: "",
-  };
+
+  // allows for smaller or larger passwords
+  const initialFormState = Object.assign(
+    {},
+    ...acceptedPassword.split("").map((_, i) => ({ [`box${i}`]: "" }))
+  );
+
   const [formValue, setFormValue] = useState<FormValue>(initialFormState);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +41,8 @@ const Login = ({ setIsSignedIn }: Props) => {
     const newValue = event.currentTarget.value;
     const objKey = event.currentTarget.id;
 
-    if (isNumber(newValue)) {
+    // only allow number or empty string
+    if (isNumberString(newValue) || newValue === "") {
       setFormValue((prevState) => {
         return { ...prevState, [objKey]: newValue };
       });
@@ -56,16 +55,16 @@ const Login = ({ setIsSignedIn }: Props) => {
   };
 
   const handleWrongPassword = () => {
+    // if password is wrong, show error, then clear form and error after delay and focus first input
+    setWrongPasswordState(true);
     setTimeout(() => {
       setFormValue(initialFormState);
       focusFirstInput();
       setWrongPasswordState(false);
     }, 800);
-
-    setWrongPasswordState(true);
   };
 
-  // This function would need to be refactored if the number of input boxes were to exceed 10
+  // would need to be refactored to handle more than 10 inputs
   const focusNextInput = (currentInputId: string) => {
     const boxNumber = parseInt(currentInputId[currentInputId.length - 1]);
     const nextInput: HTMLElement | null = document.querySelector(
@@ -85,17 +84,12 @@ const Login = ({ setIsSignedIn }: Props) => {
     }
   };
 
-  const isNumber = (input: string) => {
-    return !isNaN(parseInt(input));
-  };
-
   const passwordInputPoxes = acceptedPassword
     .split("")
     .map((_, i) => (
       <LoginTextBox
         key={i}
         id={`box${i}`}
-        width={loginTextBoxWidth}
         value={formValue[`box${i}`]}
         handleChange={handleChange}
       />
@@ -117,6 +111,7 @@ const Login = ({ setIsSignedIn }: Props) => {
   ) : (
     ""
   );
+
   const notNumberError = notNumberErrorState ? (
     <Row>
       <Col xs={{ offset: "2", span: "8" }} className="text-center text-danger">
@@ -126,9 +121,11 @@ const Login = ({ setIsSignedIn }: Props) => {
   ) : (
     ""
   );
+
   useEffect(() => {
     focusFirstInput();
   }, []);
+
   return (
     <Col xs={{ span: 4, offset: 4 }}>
       <Form onSubmit={handleSubmit}>

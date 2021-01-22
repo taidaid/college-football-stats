@@ -3,14 +3,13 @@ import { Col, Form } from "react-bootstrap";
 
 interface Props {
   id: string;
-  width: number;
   value: string;
   handleChange: any;
 }
 
-const LoginTextBox = ({ id, width, value, handleChange }: Props) => {
+const LoginTextBox = ({ id, value, handleChange }: Props) => {
   return (
-    <Col lg={width}>
+    <Col>
       <Form.Control
         id={id}
         size="lg"
@@ -18,6 +17,7 @@ const LoginTextBox = ({ id, width, value, handleChange }: Props) => {
         maxLength={1}
         value={value}
         onChange={handleChange}
+        className="text-center"
       />
     </Col>
   );

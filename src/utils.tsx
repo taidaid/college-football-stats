@@ -117,3 +117,8 @@ export const displayGamesStats = (games: Game[], year: string) => {
     return "No games to display for this year";
   }
 };
+
+export const isNumberString = (input: string) => {
+  const value = parseInt(input);
+  return typeof value === "number" && isFinite(value);
+};
