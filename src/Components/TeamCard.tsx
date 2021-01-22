@@ -44,6 +44,14 @@ const TeamCard = ({ team }: Props) => {
     }
   };
 
+  const inputError = showInputError ? (
+    <Form.Row className="text-center text-danger">
+      <Col>Please enter a valid year</Col>
+    </Form.Row>
+  ) : (
+    ""
+  );
+
   return (
     <Card className="my-3" style={{ minHeight: "220px" }}>
       <Card.Header>
@@ -63,11 +71,7 @@ const TeamCard = ({ team }: Props) => {
                 />
               </Col>
             </Form.Row>
-            {showInputError && (
-              <Form.Row className="text-center text-danger">
-                <Col>Please enter a valid year</Col>
-              </Form.Row>
-            )}
+            {inputError}
             <Form.Row className="justify-content-md-center">
               <Col className="text-center mt-3">
                 <Button variant="primary" type="submit" onSubmit={handleSubmit}>

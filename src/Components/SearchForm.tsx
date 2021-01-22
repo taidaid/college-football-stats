@@ -14,6 +14,16 @@ const SearchForm = ({
   handleSubmit,
   showSearchError,
 }: Props) => {
+  const searchError = showSearchError ? (
+    <Form.Row>
+      <Col>
+        <span className="text-danger">Please enter a valid search term</span>
+      </Col>
+    </Form.Row>
+  ) : (
+    ""
+  );
+
   return (
     <Form onSubmit={handleSubmit} className="mt-3">
       <Form.Group>
@@ -35,15 +45,7 @@ const SearchForm = ({
             </Button>
           </Col>
         </Form.Row>
-        {showSearchError && (
-          <Form.Row>
-            <Col>
-              <span className="text-danger">
-                Please enter a valid search term
-              </span>
-            </Col>
-          </Form.Row>
-        )}
+        {searchError}
       </Form.Group>
     </Form>
   );

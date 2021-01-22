@@ -18,6 +18,11 @@ const SearchModal = ({
 }: Props) => {
   const handleClose = () => setShowSearchModal(false);
 
+  // avoids searching teams if they won't be diplayed anyway
+  const searchedTeams = showSearchModal
+    ? displaySearchedTeams(searchValue, teams)
+    : "";
+
   return (
     <>
       <Modal show={showSearchModal} onHide={handleClose} scrollable>
@@ -25,9 +30,7 @@ const SearchModal = ({
           <Modal.Title>Search All Schools</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row>
-            {showSearchModal && displaySearchedTeams(searchValue, teams)}
-          </Row>
+          <Row>{searchedTeams}</Row>
         </Modal.Body>
       </Modal>
     </>
