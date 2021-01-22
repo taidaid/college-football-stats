@@ -59,11 +59,14 @@ const statsToShow = [
   "week",
 ];
 
+/** checks for the word "Date" in a key name and reformats Date to more human-readable style */
 export const doesKeyHaveDate = (key: string) => {
   return key.split(" ").some((w) => {
     return w === "Date";
   });
 };
+
+/** reformats object keys from lowercase/underscores to title case */
 export const formatStatKey = (key: string) =>
   toTitleCase(key.replace(/_/g, " "));
 const formatDate = (value: any) => {
@@ -71,6 +74,7 @@ const formatDate = (value: any) => {
   value = event.toDateString();
   return value;
 };
+
 export const toTitleCase = (str: string) => {
   return str
     .toLowerCase()
@@ -81,6 +85,7 @@ export const toTitleCase = (str: string) => {
     .join(" ");
 };
 
+/** handles formatting keys and inserting appropriate string when value is boolean, undefined, or null */
 export const formatGameStats = (game: Game) => {
   return Object.entries(game).map(([key, value]) => {
     if (!statsToShow.includes(key)) return null;
@@ -91,18 +96,22 @@ export const formatGameStats = (game: Game) => {
     if (value === true) {
       value = "Yes";
     }
+    if (value === false) {
+      value = "No";
+    }
 
     return (
       <React.Fragment key={key}>
         <Col xs="6">{key}: </Col>
         <Col xs="6" className="text-right">
-          {value || "N/A"}
+          {value ?? "N/A"}
         </Col>
       </React.Fragment>
     );
   });
 };
 
+/** displays the stats for a given array of games */
 export const displayGamesStats = (games: Game[], year: string) => {
   if (games.length) {
     return games.map((game) => (
@@ -118,6 +127,7 @@ export const displayGamesStats = (games: Game[], year: string) => {
   }
 };
 
+/** verifies that a given string is a number */
 export const isNumberString = (input: string) => {
   const value = parseInt(input);
   return typeof value === "number" && isFinite(value);
