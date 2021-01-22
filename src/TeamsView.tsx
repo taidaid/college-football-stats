@@ -14,6 +14,7 @@ const TeamsView = ({ teams }: Props) => {
   const { id } = useParams<{ id: string }>();
   const [showSearchModal, setShowSearchModal] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
+  const [showSearchError, setShowSearchError] = useState<boolean>(false);
 
   const linkOptions = [...new Set(teams.map((team) => team.school[0]))].sort();
   const linkStyles = {
@@ -29,10 +30,15 @@ const TeamsView = ({ teams }: Props) => {
     event.preventDefault();
     const newSearchValue = event.currentTarget.value;
     setSearchValue(newSearchValue);
+    setShowSearchError(false);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (searchValue === "") {
+      setShowSearchError(true);
+      return;
+    }
     setShowSearchModal(true);
   };
 
@@ -49,6 +55,7 @@ const TeamsView = ({ teams }: Props) => {
             searchValue={searchValue}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            showSearchError={showSearchError}
           />
         </Col>
       </Row>
