@@ -1,8 +1,10 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import TeamCard from "./Components/TeamCard";
+import SearchForm from "./Components/SearchForm";
+import SearchModal from "./Components/SearchModal";
 import { Team } from "./interfaces";
+import { displayTeams } from "./utils";
 
 interface Props {
   teams: Team[];
@@ -10,21 +12,8 @@ interface Props {
 
 const TeamsView = ({ teams }: Props) => {
   const { id } = useParams<{ id: string }>();
-
-  const displayTeams = () => {
-    let filter = id;
-    if (!filter) filter = "a";
-
-    const teamsToDisplay = teams.filter(
-      (team) => team.school[0].toUpperCase() === filter.toUpperCase()
-    );
-
-    return teamsToDisplay.map((team, i) => (
-      <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
-        <TeamCard team={team} />
-      </Col>
-    ));
-  };
+  const [showSearchModal, setShowSearchModal] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const linkOptions = [...new Set(teams.map((team) => team.school[0]))].sort();
   const linkStyles = {
@@ -36,6 +25,17 @@ const TeamsView = ({ teams }: Props) => {
     </Link>
   ));
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const newSearchValue = event.currentTarget.value;
+    setSearchValue(newSearchValue);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setShowSearchModal(true);
+  };
+
   return (
     <>
       <Row>
@@ -44,13 +44,26 @@ const TeamsView = ({ teams }: Props) => {
             <h1>College Football Stats</h1>
           </header>
         </Col>
+        <Col>
+          <SearchForm
+            searchValue={searchValue}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        </Col>
       </Row>
       <Row>
         <Col xs={{ offset: "3", span: "6" }} className="text-center">
           {links}
         </Col>
       </Row>
-      <Row>{displayTeams()}</Row>
+      <Row>{displayTeams(id, teams)}</Row>
+      <SearchModal
+        showSearchModal={showSearchModal}
+        searchValue={searchValue}
+        setShowSearchModal={setShowSearchModal}
+        teams={teams}
+      />
     </>
   );
 };

@@ -1,6 +1,31 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { Game } from "./interfaces";
+import TeamCard from "./Components/TeamCard";
+import { Game, Team } from "./interfaces";
+
+export const displaySearchedTeams = (filter: string, teams: Team[]) => {
+  const regex = new RegExp(filter, "gi");
+  const teamsToDisplay = teams.filter((team) => team.school.match(regex));
+  return teamsToDisplay.map((team, i) => (
+    <Col xs="12" key={`${team.school}-${i}`}>
+      <TeamCard team={team} />
+    </Col>
+  ));
+};
+
+export const displayTeams = (filter: string | undefined, teams: Team[]) => {
+  if (!filter) filter = "a";
+
+  const teamsToDisplay = teams.filter(
+    (team) => team.school[0].toUpperCase() === filter!.toUpperCase()
+  );
+
+  return teamsToDisplay.map((team, i) => (
+    <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
+      <TeamCard team={team} />
+    </Col>
+  ));
+};
 
 // I can't easily find out what away line and home line scores are, so I don't know how to display them
 const statsToShow = [
