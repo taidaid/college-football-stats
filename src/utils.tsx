@@ -4,7 +4,7 @@ import TeamCard from "./Components/TeamCard";
 import { Game, Team } from "./interfaces";
 
 export const displaySearchedTeams = (filter: string, teams: Team[]) => {
-  const regex = new RegExp(filter, "gi");
+  const regex = new RegExp(filter.trim(), "gi");
   const teamsToDisplay = teams.filter((team) => team.school.match(regex));
   return teamsToDisplay.length ? (
     teamsToDisplay.map((team, i) => (
