@@ -4,6 +4,7 @@ import { getGames } from "../api";
 import { Game, Team } from "../interfaces";
 import { isNumberString } from "../utils";
 import GamesModal from "./GamesModal";
+import TeamLogo from "./TeamLogo";
 
 interface Props {
   team: Team;
@@ -55,7 +56,10 @@ const TeamCard = ({ team }: Props) => {
   return (
     <Card className="my-3" style={{ minHeight: "220px" }}>
       <Card.Header>
-        <Card.Title className="text-center">{team.school}</Card.Title>
+        <TeamLogo logos={team.logos} dark />
+        <Card.Title className="text-center" style={{ marginBottom: "0" }}>
+          {team.school}
+        </Card.Title>
       </Card.Header>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
