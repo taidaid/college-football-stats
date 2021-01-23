@@ -117,7 +117,7 @@ export const displayGamesStats = (games: Game[], year: string) => {
     return games.map((game) => (
       <React.Fragment key={`${game.id}`}>
         <Row>{formatGameStats(game)}</Row>
-        <hr />
+        <hr style={{ borderColor: "white", backgroundColor: "white" }} />
       </React.Fragment>
     ));
   } else if (parseInt(year) < 1875) {
