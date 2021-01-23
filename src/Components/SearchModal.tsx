@@ -27,7 +27,7 @@ const SearchModal = ({
     <>
       <Modal show={showSearchModal} onHide={handleClose} scrollable>
         <Modal.Header closeButton>
-          <Modal.Title>Search All Schools</Modal.Title>
+          <Modal.Title>Search Results</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>{searchedTeams}</Row>
