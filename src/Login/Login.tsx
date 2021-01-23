@@ -46,7 +46,7 @@ const Login = ({ setIsSignedIn }: Props) => {
       setFormValue((prevState) => {
         return { ...prevState, [objKey]: newValue };
       });
-      focusNextInput(objKey);
+      if (newValue !== "") focusNextInput(objKey);
       setWrongPasswordState(false);
       setNotNumberErrorState(false);
     } else {
