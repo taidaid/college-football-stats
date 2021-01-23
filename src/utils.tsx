@@ -8,7 +8,7 @@ export const displaySearchedTeams = (filter: string, teams: Team[]) => {
   const teamsToDisplay = teams.filter((team) => team.school.match(regex));
   return teamsToDisplay.length ? (
     teamsToDisplay.map((team, i) => (
-      <Col xs="12" key={`${team.school}-${i}`}>
+      <Col xs="6" key={`${team.school}-${i}`}>
         <TeamCard team={team} />
       </Col>
     ))
@@ -52,7 +52,7 @@ const statsToShow = [
   "home_points",
   "home_team",
   "neutral_site",
-  "season",
+  // "season",
   "season_type",
   "start_date",
   "venue",
@@ -102,8 +102,14 @@ export const formatGameStats = (game: Game) => {
 
     return (
       <React.Fragment key={key}>
-        <Col xs="6">{key}: </Col>
-        <Col xs="6" className="text-right">
+        <Col xs="6" style={{ borderBottom: "1px solid #444444" }}>
+          <strong>{key}:</strong>{" "}
+        </Col>
+        <Col
+          xs="6"
+          className="text-right"
+          style={{ borderBottom: "1px solid #444444" }}
+        >
           {value ?? "N/A"}
         </Col>
       </React.Fragment>
@@ -117,7 +123,7 @@ export const displayGamesStats = (games: Game[], year: string) => {
     return games.map((game) => (
       <React.Fragment key={`${game.id}`}>
         <Row>{formatGameStats(game)}</Row>
-        <hr style={{ borderColor: "white", backgroundColor: "white" }} />
+        <hr style={{ borderColor: "#7c7c7d", backgroundColor: "#7c7c7d" }} />
       </React.Fragment>
     ));
   } else if (parseInt(year) < 1875) {
