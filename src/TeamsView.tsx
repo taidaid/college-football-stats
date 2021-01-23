@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import SearchForm from "./Components/SearchForm";
 import SearchModal from "./Components/SearchModal";
 import { Team } from "./interfaces";
+import ncaaLogo from "./assets/ncaa-4-logo-png-transparent-150-150.png";
 import { displayTeams } from "./utils";
 
 interface Props {
@@ -46,7 +47,10 @@ const TeamsView = ({ teams }: Props) => {
   return (
     <>
       <Row>
-        <Col xs={{ offset: "3", span: "6" }}>
+        <Col xs="3" style={{ maxHeight: "80px" }}>
+          <img src={ncaaLogo} alt="ncaa logo"></img>
+        </Col>
+        <Col xs="6">
           <header className="text-center">
             <h1>College Football Stats</h1>
           </header>
@@ -61,9 +65,7 @@ const TeamsView = ({ teams }: Props) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={{ offset: "3", span: "6" }} className="text-center">
-          {links}
-        </Col>
+        <Col className="text-center">{links}</Col>
       </Row>
       <Row>{displayTeams(id, teams)}</Row>
       <SearchModal
