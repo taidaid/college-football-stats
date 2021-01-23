@@ -16,7 +16,7 @@ const GamesModal = ({ games, year, showModal, setShowModal }: Props) => {
     <>
       <Modal show={showModal} onHide={handleClose} scrollable>
         <Modal.Header closeButton>
-          <Modal.Title>Year {year}</Modal.Title>
+          <Modal.Title>{year} Season</Modal.Title>
         </Modal.Header>
         <Modal.Body>{displayGamesStats(games, year)}</Modal.Body>
       </Modal>
