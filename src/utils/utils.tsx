@@ -1,7 +1,8 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import TeamCard from "./Components/TeamCard";
-import { Game, Team } from "./interfaces";
+import TeamCard from "../Components/TeamCard/TeamCard";
+import { Game, Team } from "../interfaces";
+import "./utils.css";
 
 export const displaySearchedTeams = (filter: string, teams: Team[]) => {
   const regex = new RegExp(filter.trim(), "gi");
@@ -102,14 +103,10 @@ export const formatGameStats = (game: Game) => {
 
     return (
       <React.Fragment key={key}>
-        <Col xs="6" style={{ borderBottom: "1px solid #444444" }}>
+        <Col xs="6" className="game-stats__cell">
           <strong>{key}:</strong>{" "}
         </Col>
-        <Col
-          xs="6"
-          className="text-right"
-          style={{ borderBottom: "1px solid #444444" }}
-        >
+        <Col xs="6" className="text-right game-stats__cell">
           {value ?? "N/A"}
         </Col>
       </React.Fragment>
@@ -123,7 +120,7 @@ export const displayGamesStats = (games: Game[], year: string) => {
     return games.map((game) => (
       <React.Fragment key={`${game.id}`}>
         <Row>{formatGameStats(game)}</Row>
-        <hr style={{ borderColor: "#7c7c7d", backgroundColor: "#7c7c7d" }} />
+        <hr />
       </React.Fragment>
     ));
   } else if (parseInt(year) < 1875) {

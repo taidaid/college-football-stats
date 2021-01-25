@@ -1,0 +1,8 @@
+.game-stats__cell {
+  border-bottom: 1px solid #444444;
+}
+
+hr {
+  border-color: #7c7c7d;
+  background-color: #7c7c7d;
+}

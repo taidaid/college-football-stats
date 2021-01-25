@@ -7,7 +7,7 @@ import "bootswatch/dist/darkly/bootstrap.min.css";
 import Login from "./Login/Login";
 import { getTeams } from "./api";
 import { Team } from "./interfaces";
-import TeamsView from "./TeamsView";
+import TeamsView from "./TeamsView/TeamsView";
 import { Route, Switch } from "react-router-dom";
 
 const App = () => {

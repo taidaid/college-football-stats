@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { Game } from "../interfaces";
-import { displayGamesStats } from "../utils";
+import { displayGamesStats } from "../utils/utils";
 
 interface Props {
   games: Game[];

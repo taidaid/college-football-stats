@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Button, Card, Col, Form } from "react-bootstrap";
-import { getGames } from "../api";
-import { Game, Team } from "../interfaces";
-import { isNumberString } from "../utils";
-import GamesModal from "./GamesModal";
-import TeamLogo from "./TeamLogo";
+import { getGames } from "../../api";
+import { Game, Team } from "../../interfaces";
+import { isNumberString } from "../../utils/utils";
+import GamesModal from "../GamesModal";
+import TeamLogo from "../TeamLogo";
+import "./TeamCard.css";
 
 interface Props {
   team: Team;
@@ -54,13 +55,10 @@ const TeamCard = ({ team }: Props) => {
   );
 
   return (
-    <Card className="my-3" style={{ minHeight: "220px" }}>
+    <Card className="my-3 team-card">
       <Card.Header>
         <TeamLogo logos={team.logos} dark />
-        <Card.Title
-          className="text-center"
-          style={{ marginBottom: "0", minHeight: "3em" }}
-        >
+        <Card.Title className="text-center team-card__title">
           {team.school}
         </Card.Title>
       </Card.Header>

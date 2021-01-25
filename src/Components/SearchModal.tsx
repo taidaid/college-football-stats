@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Row } from "react-bootstrap";
 import { Team } from "../interfaces";
-import { displaySearchedTeams } from "../utils";
+import { displaySearchedTeams } from "../utils/utils";
 
 interface Props {
   showSearchModal: boolean;

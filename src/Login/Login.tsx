@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { isNumberString } from "../utils";
+import { isNumberString } from "../utils/utils";
 import LoginTextBox from "./LoginTextBox";
 
 interface Props {
