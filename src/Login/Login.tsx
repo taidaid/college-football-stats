@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { isNumberString } from "../utils/utils";
 import LoginTextBox from "./LoginTextBox";
 
@@ -128,23 +128,34 @@ const Login = ({ setIsSignedIn }: Props) => {
   }, []);
 
   return (
-    <Row className="mt-3">
+    <Row className="mt-5">
       <Col
         xs={{ span: 12 }}
         md={{ span: 8, offset: 2 }}
         lg={{ span: 4, offset: 4 }}
       >
-        <Form onSubmit={handleSubmit} className="mt-3">
-          <Form.Group>
-            <Form.Label>Enter Code</Form.Label>
-            <Row className="my-4">{passwordInputPoxes}</Row>
-          </Form.Group>
-          {wrongPasswordError}
-          {notNumberError}
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+        <Card className="shadow-lg">
+          <Card.Header>
+            <Card.Title className="text-center">Enter Passcode</Card.Title>
+          </Card.Header>
+          <Card.Body>
+            <Row className="mt-3">
+              <Col>
+                <Form onSubmit={handleSubmit} className="mt-3">
+                  <Form.Group>
+                    <Form.Label srOnly>Passcode</Form.Label>
+                    <Row className="my-4">{passwordInputPoxes}</Row>
+                  </Form.Group>
+                  {wrongPasswordError}
+                  {notNumberError}
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
       </Col>
     </Row>
   );
