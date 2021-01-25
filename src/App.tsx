@@ -20,19 +20,17 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      <Container fluid>
-        {isSignedIn ? (
-          <Switch>
-            <Route path="/:id?">
-              <TeamsView teams={teams} />
-            </Route>
-          </Switch>
-        ) : (
-          <Login setIsSignedIn={setIsSignedIn} />
-        )}
-      </Container>
-    </div>
+    <Container fluid className="min-vh-100">
+      {isSignedIn ? (
+        <Switch>
+          <Route path="/:id?">
+            <TeamsView teams={teams} />
+          </Route>
+        </Switch>
+      ) : (
+        <Login setIsSignedIn={setIsSignedIn} />
+      )}
+    </Container>
   );
 };
 
