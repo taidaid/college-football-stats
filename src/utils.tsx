@@ -28,7 +28,7 @@ export const displayTeams = (filter: string | undefined, teams: Team[]) => {
 
   return teamsToDisplay.length ? (
     teamsToDisplay.map((team, i) => (
-      <Col xs="6" md="4" lg="2" key={`${team.school}-${i}`}>
+      <Col xs="12" md="4" lg="2" key={`${team.school}-${i}`}>
         <TeamCard team={team} />
       </Col>
     ))
