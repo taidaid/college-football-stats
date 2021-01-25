@@ -36,7 +36,7 @@ const GamesModal = ({ games, year, showModal, setShowModal }: Props) => {
         </Modal.Body>
       </Modal>
 
-      {teamGameStats && (
+      {showDetailedStats && (
         <DetailedStatsModal
           showModal={showDetailedStats}
           detailedStats={teamGameStats}
