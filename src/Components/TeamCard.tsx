@@ -57,7 +57,10 @@ const TeamCard = ({ team }: Props) => {
     <Card className="my-3" style={{ minHeight: "220px" }}>
       <Card.Header>
         <TeamLogo logos={team.logos} dark />
-        <Card.Title className="text-center" style={{ marginBottom: "0" }}>
+        <Card.Title
+          className="text-center"
+          style={{ marginBottom: "0", minHeight: "3em" }}
+        >
           {team.school}
         </Card.Title>
       </Card.Header>
@@ -66,7 +69,7 @@ const TeamCard = ({ team }: Props) => {
           <Form.Group>
             <Form.Row className="align-items-center my-2">
               <Col>
-                <Form.Label srOnly>Search</Form.Label>
+                <Form.Label srOnly>Search by Year</Form.Label>
                 <Form.Control
                   aria-label="Year"
                   placeholder="Enter a Year"
