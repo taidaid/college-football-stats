@@ -4,7 +4,7 @@ import { getGames } from "../../api";
 import { Game, Team } from "../../interfaces";
 import { isNumberString } from "../../utils/utils";
 import GamesModal from "../GamesModal";
-import TeamLogo from "../TeamLogo";
+import TeamLogo from "../TeamLogo/TeamLogo";
 import "./TeamCard.css";
 
 interface Props {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ncaaLogo from "../assets/ncaa-4-logo-png-transparent.png";
+import ncaaLogo from "../../assets/ncaa-4-logo-png-transparent.png";
+import "./TeamLogo.css";
 
 interface Props {
   logos: string[];
@@ -26,16 +27,6 @@ const TeamLogo = ({ logos, dark }: Props) => {
     });
   };
 
-  const initialContainerStyles: {
-    position: "relative";
-    [key: string]: string | number;
-  } = {
-    position: "relative",
-    width: "100%",
-    opacity: 0,
-    paddingBottom: "100%",
-  };
-
   useEffect(() => {
     if (logos) {
       setImgSource(dark ? logos[1] : logos[0]);
@@ -43,7 +34,7 @@ const TeamLogo = ({ logos, dark }: Props) => {
   }, [dark, logos]);
 
   return (
-    <div style={Object.assign({}, initialContainerStyles, loadedStyles)}>
+    <div className="img-container" style={loadedStyles}>
       <img
         src={imgSource}
         onError={setFallbackSource}

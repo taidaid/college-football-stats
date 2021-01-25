@@ -1,0 +1,6 @@
+.img-container {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  padding-bottom: 100%;
+}
