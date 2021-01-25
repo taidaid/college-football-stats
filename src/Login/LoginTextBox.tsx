@@ -9,7 +9,7 @@ interface Props {
 
 const LoginTextBox = ({ id, value, handleChange }: Props) => {
   return (
-    <Col>
+    <Col className="px-1 px-md-3">
       <Form.Control
         id={id}
         size="lg"
