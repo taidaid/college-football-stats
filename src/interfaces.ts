@@ -29,3 +29,18 @@ export interface Game {
   venue_id: number;
   week: number;
 }
+export interface DetailedStatsTeamStat {
+  category: string;
+  stat: string;
+}
+export interface DetailedStatsTeam {
+  conference: string;
+  homeAway: string;
+  points: number;
+  school: string;
+  stats: DetailedStatsTeamStat[];
+}
+export interface DetailedStats {
+  id: number;
+  teams: DetailedStatsTeam[];
+}

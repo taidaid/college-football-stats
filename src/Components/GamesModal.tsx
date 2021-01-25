@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { Game } from "../interfaces";
+import { getTeamGameStats } from "../api";
+import { DetailedStats, Game } from "../interfaces";
 import { displayGamesStats } from "../utils/utils";
+import DetailedStatsModal from "./DetailedStatsModal";
 
 interface Props {
   games: Game[];
@@ -11,15 +13,36 @@ interface Props {
 }
 
 const GamesModal = ({ games, year, showModal, setShowModal }: Props) => {
-  const handleClose = () => setShowModal(false);
+  const [showDetailedStats, setShowDetailedStats] = useState<boolean>(false);
+  const [teamGameStats, setTeamGameStats] = useState<DetailedStats>();
+
+  const handleCloseGamesModal = () => setShowModal(false);
+  const handleCloseDetailedStatsModal = () => setShowDetailedStats(false);
+
+  const handleShowDetailedStats = (gameId: number) => {
+    setShowDetailedStats(true);
+    getTeamGameStats(gameId).then((teamGameStats) => {
+      setTeamGameStats(teamGameStats[0]);
+    });
+  };
   return (
     <>
-      <Modal show={showModal} onHide={handleClose} scrollable>
+      <Modal show={showModal} onHide={handleCloseGamesModal} scrollable>
         <Modal.Header closeButton>
           <Modal.Title>{year} Season</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{displayGamesStats(games, year)}</Modal.Body>
+        <Modal.Body>
+          {displayGamesStats(games, year, handleShowDetailedStats)}
+        </Modal.Body>
       </Modal>
+
+      {teamGameStats && (
+        <DetailedStatsModal
+          showModal={showDetailedStats}
+          detailedStats={teamGameStats}
+          handleClose={handleCloseDetailedStatsModal}
+        />
+      )}
     </>
   );
 };

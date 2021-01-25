@@ -1,7 +1,12 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import TeamCard from "../Components/TeamCard/TeamCard";
-import { Game, Team } from "../interfaces";
+import {
+  DetailedStats,
+  DetailedStatsTeamStat,
+  Game,
+  Team,
+} from "../interfaces";
 import "./utils.css";
 
 export const displaySearchedTeams = (filter: string, teams: Team[]) => {
@@ -76,7 +81,7 @@ const formatDate = (value: any) => {
   return value;
 };
 
-export const toTitleCase = (str: string) => {
+const toTitleCase = (str: string) => {
   return str
     .toLowerCase()
     .split(" ")
@@ -115,11 +120,22 @@ export const formatGameStats = (game: Game) => {
 };
 
 /** displays the stats for a given array of games */
-export const displayGamesStats = (games: Game[], year: string) => {
+export const displayGamesStats = (
+  games: Game[],
+  year: string,
+  handleShowDetailedStats: (id: number) => void
+) => {
   if (games.length) {
     return games.map((game) => (
       <React.Fragment key={`${game.id}`}>
         <Row>{formatGameStats(game)}</Row>
+        <Row className="mt-3">
+          <Col>
+            <Button onClick={() => handleShowDetailedStats(game.id)}>
+              View Detailed Game Stats
+            </Button>
+          </Col>
+        </Row>
         <hr />
       </React.Fragment>
     ));
@@ -128,6 +144,86 @@ export const displayGamesStats = (games: Game[], year: string) => {
   } else {
     return "No games to display for this year";
   }
+};
+
+const splitCamelCase = (s: string) => {
+  return s
+    .replace(/([A-Z][a-z]|[A-Z]+(?=[A-Z]|$))/g, " $1")
+    .replace(/./, (m: string) => m.toUpperCase())
+    .replace("T D", "TD")
+    .trim();
+};
+
+/** handles formatting detailed game stats */
+export const formatDetailedStats = (
+  detailedStatsTeamStat: DetailedStatsTeamStat[]
+) => {
+  return detailedStatsTeamStat.map((statObj) => {
+    return (
+      <React.Fragment key={statObj.category}>
+        <Col xs="6" className="game-stats__cell">
+          <strong>{splitCamelCase(statObj.category)}:</strong>{" "}
+        </Col>
+        <Col xs="6" className="text-right game-stats__cell">
+          {statObj.stat ?? "N/A"}
+        </Col>
+      </React.Fragment>
+    );
+  });
+};
+
+export const displayDetailedStats = (detailedStats: DetailedStats) => {
+  return (
+    <React.Fragment>
+      <Row className="mt-3">
+        <Col>
+          <strong>School: </strong> {detailedStats.teams[0].school}
+        </Col>
+        <Col>
+          <strong>Conference: </strong> {detailedStats.teams[0].conference}
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <Col>
+          <strong>Points: </strong>
+          {detailedStats.teams[0].points}
+        </Col>
+        <Col>
+          <strong>Home/Away: </strong>
+          {detailedStats.teams[0].homeAway[0].toUpperCase() +
+            detailedStats.teams[0].homeAway.substring(
+              1,
+              detailedStats.teams[0].homeAway.length
+            )}
+        </Col>
+      </Row>
+      <Row>{formatDetailedStats(detailedStats.teams[0].stats)}</Row>
+      <hr />
+      <Row className="mt-3">
+        <Col>
+          <strong>School: </strong> {detailedStats.teams[1].school}
+        </Col>
+        <Col>
+          <strong>Conference: </strong> {detailedStats.teams[1].conference}
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <Col>
+          <strong>Points: </strong>
+          {detailedStats.teams[1].points}
+        </Col>
+        <Col>
+          <strong>Home/Away: </strong>
+          {detailedStats.teams[1].homeAway[0].toUpperCase() +
+            detailedStats.teams[1].homeAway.substring(
+              1,
+              detailedStats.teams[1].homeAway.length
+            )}
+        </Col>
+      </Row>
+      <Row>{formatDetailedStats(detailedStats.teams[1].stats)}</Row>
+    </React.Fragment>
+  );
 };
 
 /** verifies that a given string is a number */
