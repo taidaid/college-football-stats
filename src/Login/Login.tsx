@@ -128,23 +128,25 @@ const Login = ({ setIsSignedIn }: Props) => {
   }, []);
 
   return (
-    <Col
-      xs={{ span: 12 }}
-      md={{ span: 8, offset: 2 }}
-      lg={{ span: 4, offset: 4 }}
-    >
-      <Form onSubmit={handleSubmit} className="mt-3">
-        <Form.Group>
-          <Form.Label>Enter Code</Form.Label>
-          <Row>{passwordInputPoxes}</Row>
-        </Form.Group>
-        {wrongPasswordError}
-        {notNumberError}
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </Col>
+    <Row className="mt-3">
+      <Col
+        xs={{ span: 12 }}
+        md={{ span: 8, offset: 2 }}
+        lg={{ span: 4, offset: 4 }}
+      >
+        <Form onSubmit={handleSubmit} className="mt-3">
+          <Form.Group>
+            <Form.Label>Enter Code</Form.Label>
+            <Row className="my-4">{passwordInputPoxes}</Row>
+          </Form.Group>
+          {wrongPasswordError}
+          {notNumberError}
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 
