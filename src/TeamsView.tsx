@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Nav } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import SearchForm from "./Components/SearchForm";
 import SearchModal from "./Components/SearchModal";
@@ -67,8 +67,8 @@ const TeamsView = ({ teams }: Props) => {
           />
         </Col>
       </Row>
-      <Row>
-        <Col className="text-center">{links}</Col>
+      <Row className="justify-content-center">
+        <Nav>{links}</Nav>
       </Row>
       <Row style={{ margin: "0 8.33%" }}>{displayTeams(id, teams)}</Row>
       <SearchModal
