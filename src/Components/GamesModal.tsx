@@ -20,8 +20,8 @@ const GamesModal = ({ games, year, showModal, setShowModal }: Props) => {
   const handleCloseDetailedStatsModal = () => setShowDetailedStats(false);
 
   const handleShowDetailedStats = (gameId: number) => {
-    setShowDetailedStats(true);
     getTeamGameStats(gameId).then((teamGameStats) => {
+      setShowDetailedStats(true);
       setTeamGameStats(teamGameStats[0]);
     });
   };
