@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { focusNextInput, focusFirstInput } from "../utils/LoginUtils";
 import { isNumberString } from "../utils/utils";
 import LoginTextBox from "./LoginTextBox";
 
@@ -11,26 +12,26 @@ interface FormValue {
   [a: string]: string;
 }
 
-const acceptedPassword = "012345";
-
 const Login = ({ setIsSignedIn }: Props) => {
   const [notNumberErrorState, setNotNumberErrorState] = useState<boolean>(
     false
   );
   const [wrongPasswordState, setWrongPasswordState] = useState<boolean>(false);
 
+  const acceptedPasscode = "012345";
+
   // allows for smaller or larger passwords
   const initialFormState = Object.assign(
     {},
-    ...acceptedPassword.split("").map((_, i) => ({ [`box${i}`]: "" }))
+    ...acceptedPasscode.split("").map((_, i) => ({ [`box${i}`]: "" }))
   );
 
   const [formValue, setFormValue] = useState<FormValue>(initialFormState);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const submittedPassword: string = Object.values(formValue).join("");
-    if (verifyPassword(submittedPassword)) {
+    const submittedPasscode: string = Object.values(formValue).join("");
+    if (submittedPasscode === acceptedPasscode) {
       setIsSignedIn(true);
     } else {
       handleWrongPassword();
@@ -64,27 +65,11 @@ const Login = ({ setIsSignedIn }: Props) => {
     }, 800);
   };
 
-  // would need to be refactored to handle more than 10 inputs
-  const focusNextInput = (currentInputId: string) => {
-    const boxNumber = parseInt(currentInputId[currentInputId.length - 1]);
-    const nextInput: HTMLElement | null = document.querySelector(
-      `#box${boxNumber + 1}`
-    );
-
-    if (nextInput !== null) {
-      nextInput.focus();
-    }
+  const handleShowPassword = () => {
+    window.alert("The passcode is 012345");
   };
 
-  const verifyPassword = (password: string): boolean => {
-    if (password === acceptedPassword) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const passwordInputPoxes = acceptedPassword
+  const passwordInputPoxes = acceptedPasscode
     .split("")
     .map((_, i) => (
       <LoginTextBox
@@ -95,16 +80,9 @@ const Login = ({ setIsSignedIn }: Props) => {
       />
     ));
 
-  const focusFirstInput = () => {
-    const firstInput: HTMLElement | null = document.querySelector("#box0");
-    if (firstInput) {
-      firstInput.focus();
-    }
-  };
-
   const wrongPasswordError = wrongPasswordState ? (
     <Row>
-      <Col xs={{ offset: "2", span: "8" }} className="text-center text-danger">
+      <Col className="text-center text-danger">
         Incorrect code. Please try again.
       </Col>
     </Row>
@@ -114,9 +92,7 @@ const Login = ({ setIsSignedIn }: Props) => {
 
   const notNumberError = notNumberErrorState ? (
     <Row>
-      <Col xs={{ offset: "2", span: "8" }} className="text-center text-danger">
-        Input must be a number.
-      </Col>
+      <Col className="text-center text-danger">Input must be a number.</Col>
     </Row>
   ) : (
     ""
@@ -148,9 +124,18 @@ const Login = ({ setIsSignedIn }: Props) => {
                   </Form.Group>
                   {wrongPasswordError}
                   {notNumberError}
-                  <Button variant="primary" type="submit">
-                    Submit
-                  </Button>
+                  <Row>
+                    <Col>
+                      <Button variant="primary" type="submit">
+                        Submit
+                      </Button>
+                    </Col>
+                    <Col>
+                      <p onClick={handleShowPassword} className="btn">
+                        <u>Forgot Passcode?</u>
+                      </p>
+                    </Col>
+                  </Row>
                 </Form>
               </Col>
             </Row>
