@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { DetailedStats } from "../interfaces";
-import { displayDetailedStats } from "../utils/utils";
+import { displayDetailedStats } from "../utils/DetailedStatsModalUtils";
 
 interface Props {
   showModal: boolean;

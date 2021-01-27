@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { getTeamGameStats } from "../api";
 import { DetailedStats, Game } from "../interfaces";
-import { displayGamesStats } from "../utils/utils";
+import { displayGamesStats } from "../utils/GamesModalUtils";
 import DetailedStatsModal from "./DetailedStatsModal";
 
 interface Props {
