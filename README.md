@@ -2,16 +2,6 @@
 
 [API](https://any-api.com/collegefootballdata_com/collegefootballdata_com/docs/API_Description)
 
-## TODO
-
-- Login Page should move cursor backwards when char is deleted
-- Login Page should submit when all input boxes are filled
-- Login input boxes should be type number
-  - https://stackoverflow.com/questions/55472118/html-input-type-for-phone-number
-- TeamsView should not have duplicated inputs for every card
-- Modal stack should not durther darken rest of view
-  - Possibly change team cards to entirely clickable which leads to another page for entering the year to view team games. Then only one modal would be used to display specific stats
-
 ## Login Page Goal
 
 The login page will use a single predefined code for logging in. The page should resemble the Adobe "forgot password" functionality which uses a 6-digit code separated into boxes.
